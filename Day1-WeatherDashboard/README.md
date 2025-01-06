@@ -14,3 +14,12 @@
 - echo "OPENWEATHER_API_KEY=your_api_key_here" >> .env
 - echo "AWS_BUCKET_NAME=bucketname" >> .env 
 - pip install python-dotenv
+
+
+##### Create a new environment 
+- python3 -m venv weather-dash-env
+- source weather-dash-env/bin/activate (activate the environment)
+- aws configure
+- pip3 install -r requirements.txt
+- pip install boto3 (using boto to use the aws cli access keys)
+- python3 src/weather_dashboard.py
