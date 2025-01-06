@@ -1,56 +1,62 @@
+---
+
 # 🚀 30 Day DevOps Challenge | DevOpsAllStarsChallenge
 
-Welcome to my **30 Day DevOps Challenge**! Over the next 30 days, I'll be diving deep into key DevOps tools, techniques, and best practices to build a strong foundation in modern DevOps workflows. This challenge has been designed to enhance my hands-on experience, increase my exposure to DevOps technologies, and prepare me for a future in DevOps and Site Reliability Engineering roles.
+Welcome to my **30 Day DevOps Challenge**! Over the next 30 days, I'll be diving into essential DevOps tools, techniques, and best practices. This journey will help me build a solid foundation in modern DevOps workflows and prepare me for roles in **DevOps** and **Cloud Engineering**.
 
 ---
 
 ## 💡 Challenge Overview
 
-Throughout this challenge, I'll be tackling various aspects of DevOps, including:
-
-- **Version Control**: Mastering Git and GitHub to manage source code efficiently.
-- **CI/CD Pipelines**: Automating deployments using tools like Jenkins, GitLab CI, and more.
-- **Cloud Platforms**: Gaining expertise in AWS, Azure, and GCP to manage infrastructure as code.
-- **Containerization & Orchestration**: Using Docker and Kubernetes for efficient container management.
-- **Infrastructure as Code**: Automating infrastructure with tools like Terraform and Ansible.
-- **Monitoring & Logging**: Implementing monitoring solutions with Prometheus and the ELK stack.
-- **Automation & Scripting**: Enhancing workflows with shell scripts and Python automation.
-
-By completing this challenge, I aim to sharpen my skills in DevOps, gain a deeper understanding of the tools and practices that power modern infrastructure, and position myself as a highly capable candidate for DevOps roles.
+- **Version Control**: Mastering Git and GitHub for source code management.
+- **CI/CD Pipelines**: Automating deployments with Terraform, GitLab CI, and more.
+- **Cloud Platforms**: Gaining experience with AWS, Azure, and GCP for infrastructure management.
+- **Containerization & Orchestration**: Working with Docker and Kubernetes for efficient container management.
+- **Infrastructure as Code**: Automating infrastructure with Terraform and Ansible.
+- **Monitoring & Logging**: Implementing solutions with Prometheus and the ELK stack.
+- **Automation & Scripting**: Enhancing workflows using shell scripts and Python.
 
 ---
 
 ## 📅 Daily Challenges
 
-Each day of the challenge, I’ll be tackling new tasks and demonstrating my learning journey. Here’s an example of the first task:
-
-### Day 1: [AWS Weather Dashboard Application](https://github.com/blessingaliu/30DayDevopsChallenge/tree/main/Day1-WeatherDashboard)
-
-On Day 1, I set up a local Git repository and pushed it to GitHub. This serves as the foundation for my entire challenge and allows me to track and share my progress.
-
-Here’s a quick summary of what was done:
-
-- Created a new directory and initialized it with Git.
-- Added and committed my changes to the repo.
-- Set up a GitHub repository and pushed the changes there for version control.
-
-This initial setup is crucial as it forms the version-controlled environment where I’ll be managing all the challenges ahead.
-
+| **Day**   | **Challenge Title**                                                                 | **Tasks Completed**                                                                                               |
+|-----------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| **Day 1** | [AWS Weather Dashboard Application](https://github.com/blessingaliu/30DayDevopsChallenge/tree/main/Day1-WeatherDashboard) | - Initialized a new project directory with Git. <br> - Created a GitHub repo and pushed changes. <br> - Set up Python app to fetch weather data from OpenWeather API. <br> - Created Dockerfile for containerization. |
+| **Day 2** | [Task Title Here](#)                                                                  | - [Task Summary for Day 2]                                                                                        |
+| **Day 3** | [Task Title Here](#)                                                                  | - [Task Summary for Day 3]                                                                                        |
+| **Day 4** | [Task Title Here](#)                                                                  | - [Task Summary for Day 4]                                                                                        |
+| **Day 5** | [Task Title Here](#)                                                                  | - [Task Summary for Day 5]                                                                                        |
+| **Day 6** | [Task Title Here](#)                                                                  | - [Task Summary for Day 6]                                                                                        |
+| **Day 7** | [Task Title Here](#)                                                                  | - [Task Summary for Day 7]                                                                                        |
+| **Day 8** | [Task Title Here](#)                                                                  | - [Task Summary for Day 8]                                                                                        |
+| **Day 9** | [Task Title Here](#)                                                                  | - [Task Summary for Day 9]                                                                                        |
+| **Day 10** | [Task Title Here](#)                                                                 | - [Task Summary for Day 10]                                                                                        |
+| **Day 11** | [Task Title Here](#)                                                                 | - [Task Summary for Day 11]                                                                                        |
+| **Day 12** | [Task Title Here](#)                                                                 | - [Task Summary for Day 12]                                                                                        |
+| **Day 13** | [Task Title Here](#)                                                                 | - [Task Summary for Day 13]                                                                                        |
+| **Day 14** | [Task Title Here](#)                                                                 | - [Task Summary for Day 14]                                                                                        |
+| **Day 15** | [Task Title Here](#)                                                                 | - [Task Summary for Day 15]                                                                                        |
+| **Day 16** | [Task Title Here](#)                                                                 | - [Task Summary for Day 16]                                                                                        |
+| **Day 17** | [Task Title Here](#)                                                                 | - [Task Summary for Day 17]                                                                                        |
+| **Day 18** | [Task Title Here](#)                                                                 | - [Task Summary for Day 18]                                                                                        |
+| **Day 19** | [Task Title Here](#)                                                                 | - [Task Summary for Day 19]                                                                                        |
+| **Day 20** | [Task Title Here](#)                                                                 | - [Task Summary for Day 20]                                                                                        |
+| **Day 21** | [Task Title Here](#)                                                                 | - [Task Summary for Day 21]                                                                                        |
+| **Day 22** | [Task Title Here](#)                                                                 | - [Task Summary for Day 22]                                                                                        |
+| **Day 23** | [Task Title Here](#)                                                                 | - [Task Summary for Day 23]                                                                                        |
+| **Day 24** | [Task Title Here](#)                                                                 | - [Task Summary for Day 24]                                                                                        |
+| **Day 25** | [Task Title Here](#)                                                                 | - [Task Summary for Day 25]                                                                                        |
+| **Day 26** | [Task Title Here](#)                                                                 | - [Task Summary for Day 26]                                                                                        |
+| **Day 27** | [Task Title Here](#)                                                                 | - [Task Summary for Day 27]                                                                                        |
+| **Day 28** | [Task Title Here](#)                                                                 | - [Task Summary for Day 28]                                                                                        |
+| **Day 29** | [Task Title Here](#)                                                                 | - [Task Summary for Day 29]                                                                                        |
+| **Day 30** | [Task Title Here](#)                                                                 | - [Task Summary for Day 30]                                                                                        |
+                                         
 ---
 
-## 💼 My DevOps Journey
+## 🙋‍♂️ Let's Connect
 
-By the end of this challenge, I’ll have a solid understanding of various DevOps tools and principles. I’m excited to share the progress with you, and I’m looking forward to leveraging these skills in a professional DevOps role.
-
-I’m always open to learning new tools, methodologies, and best practices. This challenge is one of the many steps I’m taking to further my career and deepen my technical expertise.
-
+If you're looking for a DevOps engineer who thrives in fast-paced environments and loves solving problems through automation and cloud technologies, I’d love the opportunity to discuss my progress and how I can contribute to your team!
+- [Email me](mailto:blessingaliu@ymail.com)
 ---
-
-## 📜 License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-If you're looking for a passionate and motivated DevOps engineer who thrives in fast-paced environments and loves solving problems with automation and cloud solutions, I would love the opportunity to discuss my progress and how I can contribute to your team.
-
