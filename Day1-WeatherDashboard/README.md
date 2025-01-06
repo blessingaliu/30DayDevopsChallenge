@@ -1,18 +1,30 @@
-# Setting up Local Python Environment on VS Code for Weather Dashboard 
+# 🌤️ AWS Weather Dashboard Application
 
-This guide walks through setting up a local Python environment for a weather dashboard project that fetches weather data from OpenWeather API and stores it in an S3 bucket.
+This application fetches **weather data** from the **OpenWeather** API and displays it on a dashboard. It utilizes **AWS** services such as **S3** for data storage and **AWS CLI** for managing AWS resources. Built with **Python**, the app integrates with **AWS Cloud** for deployment.
 
-### Prerequisites
+---
 
-Ensure the following tools are installed on your system:
-- Python 3.x
-- pip (Python's package manager)
-- AWS CLI (Command Line Interface)
-- VS Code (with Python extension)
+## 🛠️ Prerequisites
 
-### 1. **Create Project Directory**
+To run this application locally or on AWS, you’ll need the following:
 
-Within the project directory, create the necessary folders and files:
+- 🐍 **Python 3.x** installed on your local machine.
+- 🛠️ **AWS CLI** installed and configured with your AWS credentials.
+- 🌍 **OpenWeather API Key** (for fetching weather data).
+- ☁️ **AWS Account** with access to services **S3**
+
+---
+
+## 🚀 Setup
+
+### 1. Clone the repository:
+
+```bash
+git clone <repository_url>
+cd Day1-WeatherDashboard
+```
+
+### 2. Create required directories:
 
 ```bash
 mkdir src tests data
@@ -23,90 +35,89 @@ echo "pycache/" >> .gitignore
 echo ".zip" >> .gitignore
 ```
 
-- `src/`: Stores source code files.
-- `tests/`: Directory for testing files.
-- `data/`: Directory for storing fetched weather data.
-- `.env`: Environment file for sensitive keys.
-- `.gitignore`: Specifies files and directories to exclude from Git.
-- `requirements.txt`: Stores project dependencies.
+### 3. Install dependencies:
 
-### 2. **Set up Dependencies**
+Create the `requirements.txt` file and add the following dependencies:
 
-Open `requirements.txt` and add the following libraries:
-
-```bash
-echo "boto3===1.26.137" >> requirements.txt
-echo "python-dotenv==1.0.0" >> requirements.txt
-echo "requests==2.28.2" >> requirements.txt
+```txt
+boto3===1.26.137
+python-dotenv==1.0.0
+requests==2.28.2
 ```
 
-Now, install the dependencies:
+Install the requirements:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. **Configure AWS CLI**
+### 4. 🛠️ AWS Configuration:
 
-Run the AWS CLI configuration to set up your access keys and region:
+The application uses AWS credentials saved on your machine. Configure your AWS CLI by running:
 
 ```bash
 aws configure
 ```
 
-- Enter your AWS Access Key ID.
-- Enter your AWS Secret Access Key.
-- Enter your desired AWS region (e.g., `us-west-2`).
+This will prompt you for:
 
-### 4. **Set up Environment Variables**
+- AWS Access Key ID
+- AWS Secret Access Key
+- Default region name
+- Default output format (optional)
 
-Create a `.env` file and add the following environment variables:
+These credentials will be used by `boto3` to interact with AWS services like **S3**.
 
-```bash
-echo "OPENWEATHER_API_KEY=your_api_key_here" >> .env
-echo "AWS_BUCKET_NAME=bucketname" >> .env
+### 5. Add environment variables:
+
+Create a `.env` file in the project root directory and add your **OpenWeather API key** and **AWS Bucket name**:
+
+```txt
+OPENWEATHER_API_KEY=your_api_key_here
+AWS_BUCKET_NAME=your_bucket_name_here
 ```
 
-- Replace `your_api_key_here` with your OpenWeather API key.
-- Replace `bucketname` with your S3 bucket name.
+### 6. Set up a virtual environment:
 
-Ensure `.env` is added to `.gitignore` to keep it private.
-
-### 5. **Create Python Virtual Environment**
-
-Create and activate a virtual environment for the project:
+Create and activate a Python virtual environment to manage dependencies separately:
 
 ```bash
 python3 -m venv weather-dash-env
-source weather-dash-env/bin/activate  # On macOS/Linux
+source weather-dash-env/bin/activate  # On Windows: weather-dash-env\Scripts\activate
 ```
 
-This ensures your dependencies are installed in an isolated environment.
-
-### 6. **Install Python Dependencies in Virtual Environment**
-
-Once the virtual environment is activated, install the dependencies from `requirements.txt`:
+Reinstall the dependencies after activation:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 7. **Install Additional Dependencies**
+---
 
-Install the `boto3` library to interact with AWS services:
+## 💻 Usage
 
-```bash
-pip install boto3
-```
-
-This will allow the project to interact with AWS services, such as S3.
-
-### 8. **Run the Weather Dashboard Script**
-
-Finally, you can run the Python script that fetches the weather data and uploads it to S3:
+To run the application, execute the following command:
 
 ```bash
 python3 src/weather_dashboard.py
 ```
 
-This will execute the script and run the weather fetching process.
+This command will:
+
+1. Fetch weather data from the **OpenWeather API**.
+2. Upload the data to your **AWS S3 bucket**.
+3. Display the data in the weather dashboard.
+
+---
+
+### 🌐 AWS Configuration
+
+The app uses AWS credentials stored locally via the **AWS CLI** configuration (`~/.aws/credentials`). These credentials enable the app to interact with AWS services like **S3**. The credentials are necessary for uploading data to the **S3 bucket** defined in your `.env` file.
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
