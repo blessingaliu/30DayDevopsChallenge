@@ -1,15 +1,15 @@
 ---
 
-# 🚀 30 Day DevOps Challenge | DevOpsAllStarsChallenge
+## 🚀 30 Day DevOps Challenge | DevOpsAllStarsChallenge
 
 Welcome to my **30 Day DevOps Challenge**! Over the next 30 days, I'll be diving into essential DevOps tools, techniques, and best practices. This journey will help me build a solid foundation in modern DevOps workflows and prepare me for roles in **DevOps** and **Cloud Engineering**.
 
 ---
 
-## 💡 Challenge Overview
+### 💡 Challenge Overview
 
 - **Version Control**: Mastering Git and GitHub for source code management.
-- **CI/CD Pipelines**: Automating deployments with Terraform, GitLab CI, and more.
+- **CI/CD Pipelines**: Automating deployments with GitLab CI, and more.
 - **Cloud Platforms**: Gaining experience with AWS, Azure, and GCP for infrastructure management.
 - **Containerization & Orchestration**: Working with Docker and Kubernetes for efficient container management.
 - **Infrastructure as Code**: Automating infrastructure with Terraform and Ansible.
@@ -18,11 +18,11 @@ Welcome to my **30 Day DevOps Challenge**! Over the next 30 days, I'll be diving
 
 ---
 
-## 📅 Daily Challenges
+### 📅 Daily Challenges
 
 | **Day**   | **Challenge Title**                                                                 | **Tasks Completed**                                                                                               |
 |-----------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| **Day 1** | [AWS Weather Dashboard Application](https://github.com/blessingaliu/30DayDevopsChallenge/tree/main/Day1-WeatherDashboard) | - Initialized a new project directory with Git. <br> - Created a GitHub repo and pushed changes. <br> - Set up Python app to fetch weather data from OpenWeather API. <br> - Created Dockerfile for containerization. |
+| **Day 1** | [AWS Weather Dashboard Application](https://github.com/blessingaliu/30DayDevopsChallenge/tree/main/Day1-WeatherDashboard) | - Implemented S3 bucket creation if not already existing. <br> - Developed Python app to fetch weather data from OpenWeather API. <br> - Enabled saving weather data to S3 in JSON format. <br> - Allowed user input via CLI to fetch and save weather data to S3. |
 | **Day 2** | [Task Title Here](#)                                                                  | - [Task Summary for Day 2]                                                                                        |
 | **Day 3** | [Task Title Here](#)                                                                  | - [Task Summary for Day 3]                                                                                        |
 | **Day 4** | [Task Title Here](#)                                                                  | - [Task Summary for Day 4]                                                                                        |
@@ -55,7 +55,7 @@ Welcome to my **30 Day DevOps Challenge**! Over the next 30 days, I'll be diving
                                          
 ---
 
-## 🙋‍♂️ Let's Connect
+### 🙋‍♂️ Let's Connect
 
 If you're looking for a DevOps engineer who thrives in fast-paced environments and loves solving problems through automation and cloud technologies, I’d love the opportunity to discuss my progress and how I can contribute to your team!
 - [Email me](mailto:blessingaliu@ymail.com)
