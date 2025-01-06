@@ -1,17 +1,22 @@
+
+---
+
 # 🌤️ AWS Weather Dashboard Application
 
-This application fetches **weather data** from the **OpenWeather** API and displays it on a dashboard. It utilizes **AWS** services such as **S3** for data storage and **AWS CLI** for managing AWS resources. Built with **Python**, the app integrates with **AWS Cloud** for deployment.
+This application fetches **weather data** from the **OpenWeather** API and displays it on a dashboard. It uses **AWS** services such as **S3** for data storage and **AWS CLI** for managing AWS resources. The app is built with **Python** and integrates with **AWS Cloud** for deployment. 
+
+You can run the app locally or inside a Docker container.
 
 ---
 
 ## 🛠️ Prerequisites
 
-To run this application locally or on AWS, you’ll need the following:
+Before you run the application, you’ll need the following:
 
-- 🐍 **Python 3.x** installed on your local machine.
+- 🐍 **Python 3.x** or **Docker** installed on your local machine.
 - 🛠️ **AWS CLI** installed and configured with your AWS credentials.
 - 🌍 **OpenWeather API Key** (for fetching weather data).
-- ☁️ **AWS Account** with access to services **S3**
+- ☁️ **AWS Account** with access to services like **S3**.
 
 ---
 
@@ -24,7 +29,7 @@ git clone <repository_url>
 cd Day1-WeatherDashboard
 ```
 
-### 2. Create required directories:
+### 2. Create required directories and files:
 
 ```bash
 mkdir src tests data
@@ -53,7 +58,7 @@ pip install -r requirements.txt
 
 ### 4. 🛠️ AWS Configuration:
 
-The application uses AWS credentials saved on your machine. Configure your AWS CLI by running:
+Configure your AWS CLI by running:
 
 ```bash
 aws configure
@@ -77,40 +82,58 @@ OPENWEATHER_API_KEY=your_api_key_here
 AWS_BUCKET_NAME=your_bucket_name_here
 ```
 
-### 6. Set up a virtual environment:
+---
 
-Create and activate a Python virtual environment to manage dependencies separately:
+## 💻 Running the Application
+
+### Option 1: Running Locally
+
+1. Set up a Python virtual environment:
 
 ```bash
 python3 -m venv weather-dash-env
 source weather-dash-env/bin/activate  # On Windows: weather-dash-env\Scripts\activate
 ```
 
-Reinstall the dependencies after activation:
+2. Reinstall dependencies inside the virtual environment:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## 💻 Usage
-
-To run the application, execute the following command:
+3. Run the application:
 
 ```bash
 python3 src/weather_dashboard.py
 ```
 
-This command will:
+This will:
 
-1. Fetch weather data from the **OpenWeather API**.
-2. Upload the data to your **AWS S3 bucket**.
-3. Display the data in the weather dashboard.
+- Fetch weather data from the **OpenWeather API**.
+- Upload the data to your **AWS S3 bucket**.
+- Display the weather data in the dashboard.
 
 ---
 
-### 🌐 AWS Configuration
+### Option 2: Running with Docker
+
+1. **Build the Docker image**:
+
+```bash
+docker build -t weather-dashboard .
+```
+
+2. **Run the container** with environment variables from the `.env` file:
+
+```bash
+docker run --env-file .env weather-dashboard
+```
+
+This will start the container and run the application, using the environment variables in your `.env` file for configuration.
+
+---
+
+## 🌐 AWS Configuration
 
 The app uses AWS credentials stored locally via the **AWS CLI** configuration (`~/.aws/credentials`). These credentials enable the app to interact with AWS services like **S3**. The credentials are necessary for uploading data to the **S3 bucket** defined in your `.env` file.
 
