@@ -1,137 +1,108 @@
 
 ---
 
-## **How to set up environment to complete the Weather Dashboard**
+## How to Set Up Environment to Complete the Weather Dashboard
 
-This guide explains how to create a weather dashboard app that fetches weather data from OpenWeather API and uploads it to an AWS S3 bucket with public access for the JSON files.
+This guide walks you through the process of setting up a weather dashboard app that fetches weather data from the OpenWeather API and uploads it to an AWS S3 bucket for storing JSON files with public access.
 
----
+## 1. Prerequisites: Account Setup & Tool Installation
 
-### **1. Prerequisites**
-
-Before setting up the environment, complete the following steps:
-
----
-
-#### **1.1 Create an AWS Account (if you don’t already have one)**
-
-1. **Go to [AWS Free Tier Signup](https://aws.amazon.com/free/).**
-   - Click **"Create a Free Account"**.
-2. **Enter Your Details:**
-   - Provide an email address, password, and account name.
-3. **Select the Account Type:**
-   - Choose **"Personal"** or **"Professional"**.
-4. **Billing Information:**
-   - Enter your credit/debit card details for verification.
-5. **Verify Your Identity:**
-   - Provide your phone number and complete the phone verification.
-6. **Choose a Support Plan:**
-   - Select **"Basic Support (Free)"** unless you need additional support.
-7. **Complete Registration:**
-   - Wait for the confirmation email that your account is active.
-
----
-
-#### **1.2 Obtain OpenWeather API Key**
-
-1. Visit [OpenWeather API](https://openweathermap.org/api).
-2. Sign up for a free account if you don’t have one.
-3. Once logged in:
-   - Navigate to **API Keys** in your account dashboard.
-   - Generate and copy your API key.
-
----
-
-#### **1.3 Install Required Tools**
-
-Ensure the following tools are installed:
-- **Python 3.x**: [Download](https://www.python.org/downloads/).
-- **pip**: Bundled with Python. Verify installation:
+### 1.1 Install Necessary Tools
+- **Python 3.x**: Download Python from [here](https://www.python.org/downloads/). Once installed, verify the installation by running:
   ```bash
-  python3 -m pip --version
+  python3 --version
   ```
-- **AWS CLI**: [Download](https://aws.amazon.com/cli/). Verify installation:
+  
+- **pip**: Verify pip is installed with Python by running:
+  ```bash
+  pip --version
+  ```
+
+- **AWS CLI**: Download AWS CLI from [here](https://aws.amazon.com/cli/). After installation, verify it by running:
   ```bash
   aws --version
   ```
-- **VS Code**: [Download](https://code.visualstudio.com/).
-  - Install the **Python extension** from the Extensions Marketplace.
+
+- **VS Code**: Download and install Visual Studio Code from [here](https://code.visualstudio.com/), and add the Python extension for enhanced development support.
 
 ---
 
-### **2. Log in to AWS CLI**
+### 1.2 Create an AWS Account & Access Keys
 
-Log in using the AWS CLI:
+1. Go to the [AWS Free Tier Signup](https://aws.amazon.com/free/) page and create an AWS account.
+2. After signing in, generate **Access Keys** for AWS CLI:
+   - Navigate to the **IAM Console**.
+   - In the left-hand menu, click **Users**, then select your user.
+   - Under the **Security Credentials** tab, click **Create Access Key**.
+   - Copy the **Access Key ID** and **Secret Access Key** and store them securely.
+
+---
+
+### 1.3 Obtain OpenWeather API Key
+
+1. Visit the [OpenWeather API](https://openweathermap.org/api) page and sign up for a free account if you don’t have one.
+2. Once logged in, navigate to **API Keys** and generate a new key. Copy the generated key.
+
+---
+
+## 2. Log in to AWS CLI
+
+After setting up your AWS Access Keys, log in to the AWS CLI by running the following command:
 
 ```bash
 aws configure
 ```
 
-- Enter your **AWS Access Key ID** and **AWS Secret Access Key** (generated earlier).
-- Enter your default region (e.g., `us-west-2`).
-- Set the output format to `json`.
+- Enter your **AWS Access Key ID** and **AWS Secret Access Key**.
+- Set the **Default region** (e.g., `us-west-2`).
+- Set the **Default output format** to `json`.
 
 ---
 
-### **3. Create an S3 Bucket**
+## 3. Create an S3 Bucket
 
-Create a new S3 bucket to store the JSON files:
+1. Create a new S3 bucket to store the JSON files by running the following command:
 
 ```bash
 aws s3api create-bucket --bucket your-bucket-name --region your-region --create-bucket-configuration LocationConstraint=your-region
 ```
 
-- Replace `your-bucket-name` with your desired bucket name.
-- Replace `your-region` with your AWS region (e.g., `us-west-2`).
+Replace the placeholders with:
+- `your-bucket-name`: The name you want for your S3 bucket.
+- `your-region`: The AWS region of your bucket (e.g., `us-west-2`).
 
 ---
 
-### **4. Set Bucket Policy for Public Access**
+## 4. Set Bucket Policy for Public Access
 
-Update the bucket policy to make the JSON files publicly accessible:
+1. Create a bucket policy to make the files publicly accessible by creating a file named `bucket-policy.json`:
 
-1. **Edit Bucket Policy**:
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::your-bucket-name/*"
+        }
+    ]
+}
+```
 
-   Create a JSON policy file named `bucket-policy.json`:
+2. Apply the policy to your S3 bucket:
 
-   ```json
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Sid": "PublicReadGetObject",
-               "Effect": "Allow",
-               "Principal": "*",
-               "Action": "s3:GetObject",
-               "Resource": "arn:aws:s3:::your-bucket-name/*"
-           }
-       ]
-   }
-   ```
-
-   Replace `your-bucket-name` with your S3 bucket name.
-
-2. **Apply the Policy**:
-
-   Run the following command to apply the policy:
-
-   ```bash
-   aws s3api put-bucket-policy --bucket your-bucket-name --policy file://bucket-policy.json
-   ```
-
-3. **Enable Static Website Hosting (Optional)**:
-
-   If you want to access JSON files via a static website, enable static website hosting:
-
-   ```bash
-   aws s3 website s3://your-bucket-name/ --index-document index.html --error-document error.html
-   ```
+```bash
+aws s3api put-bucket-policy --bucket your-bucket-name --policy file://bucket-policy.json
+```
 
 ---
 
-### **5. Set Up Project Directory**
+## 5. Set Up Project Directory
 
-Set up the project structure and create necessary files:
+1. Create the necessary project structure:
 
 ```bash
 mkdir weather-dashboard
@@ -145,70 +116,67 @@ echo "__pycache__/" >> .gitignore
 
 ---
 
-### **6. Install Dependencies**
+## 6. Create a GitHub Account and Repository
 
-1. Create a virtual environment:
-
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # macOS/Linux
-   ```
-
-2. Add and install required libraries:
-
-   ```bash
-   echo "boto3==1.26.137" >> requirements.txt
-   echo "python-dotenv==1.0.0" >> requirements.txt
-   echo "requests==2.28.2" >> requirements.txt
-   pip install -r requirements.txt
-   ```
+1. **Sign Up for GitHub**: Visit [GitHub Signup](https://github.com/) and create an account.
+2. **Create a Remote Repository**: Log in to GitHub, click **New Repository**, and give it a name (e.g., `weather-dashboard`).
+3. **Push Local Repository to GitHub**:
+   - Initialize a local Git repository:
+     ```bash
+     git init
+     ```
+   - Add and commit all files:
+     ```bash
+     git add .
+     git commit -m "Initial commit"
+     ```
+   - Add the remote repository URL and push the changes:
+     ```bash
+     git remote add origin https://github.com/your-username/weather-dashboard.git
+     git branch -M main
+     git push -u origin main
+     ```
 
 ---
 
-### **7. Add Environment Variables**
+## 7. Install Dependencies
 
-Store sensitive data in a `.env` file:
+1. Create a virtual environment and activate it:
 
 ```bash
-echo "OPENWEATHER_API_KEY=your_openweather_api_key" >> .env
-echo "AWS_BUCKET_NAME=your-bucket-name" >> .env
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
 ```
 
-Replace placeholders with:
+2. Add dependencies to `requirements.txt`:
+
+```bash
+echo "boto3==1.26.137" >> requirements.txt
+echo "python-dotenv==1.0.0" >> requirements.txt
+echo "requests==2.28.2" >> requirements.txt
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 8. Add Environment Variables
+
+1. Create a `.env` file in the root directory of your project and add the following lines:
+
+```bash
+OPENWEATHER_API_KEY=your_openweather_api_key
+AWS_BUCKET_NAME=your-bucket-name
+```
+
+Replace the placeholders with:
 - **`your_openweather_api_key`**: Your OpenWeather API key.
 - **`your-bucket-name`**: Name of your S3 bucket.
 
 ---
 
-### **8. Write the Weather Dashboard Script**
-
-Implement the functionality in `src/weather_dashboard.py`:
-
-```python
-import boto3
-import requests
-import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
-BUCKET_NAME = os.getenv("AWS_BUCKET_NAME")
-```
-
----
-
-### **9. Run the Application**
-
-Run the script to test functionality:
-
-```bash
-python3 src/weather_dashboard.py
-```
-
-You can now access the JSON file using the S3 public URL:
-
-```bash
-https://your-bucket-name.s3.your-region.amazonaws.com/city_weather.json
-```
+You are now ready to implement the Weather Dashboard Script in `src/weather_dashboard.py`. This includes fetching weather data from the OpenWeather API and uploading it to your S3 bucket.
