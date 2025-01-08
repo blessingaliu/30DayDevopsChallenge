@@ -3,12 +3,12 @@
 
 # 🌤️ AWS Game Day Notifications Service 
 
-Creating an Event-driven Game Day Notification solution utilizing AWS serverless services including AWS Lambda, Amazon SNS and Amazon EventBridge with an external API. I used AWS CloudFormation to automate the rest of the infrastructure after setting up the SNS Notification and Subscription (step by step guidance is documented in my howto.md)
+Creating an Event-driven Game Day Notification solution utilizing AWS serverless services including AWS Lambda, Amazon SNS and Amazon EventBridge with an external API. I used AWS CloudFormation to automate the rest of the infrastructure after setting up the SNS Notification and Subscription (step by step guidance is documented in my [howto.md](https://github.com/blessingaliu/30DayDevopsChallenge/blob/main/Day2-AWSGameDayNotificationService/howto.md))
 
 ### System Architecture Overview
 
 ```plaintext
-      +-------------------+
+                  +-------------------+
                   | SportsData.io API |
                   +-------------------+
                            |

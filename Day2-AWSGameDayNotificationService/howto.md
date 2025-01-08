@@ -88,6 +88,7 @@ zip lambda_code.zip lambda_function.py
 - **Check for Errors**:
     - If any resource fails to create, CloudFormation will show the error in the **Events** tab. Troubleshoot and correct any issues.
 
+[Stack successfully created](Day2-AWSGameDayNotificationService/assets/cloudformationstack.png)
  
 ---
 ### Step 7: Test the Setup
@@ -111,5 +112,5 @@ zip lambda_code.zip lambda_function.py
     - Based on the cron expression cron(0 9-23/2 * * ? *), the Lambda function will be triggered every 2 hours from 9:00 AM to 11:00 PM (in UTC).
 
 At 11AM, I received my email:
-[Email Notification]()
+[Email Notification](/home/blessing/GitHub/30DayDevopsChallenge/Day2-AWSGameDayNotificationService/assets/gamedayupdates.png)
   
