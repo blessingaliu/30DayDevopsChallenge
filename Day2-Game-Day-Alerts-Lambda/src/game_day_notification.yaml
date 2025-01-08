@@ -1,0 +1,125 @@
+AWSTemplateFormatVersion: '2010-09-09'  # Version of CloudFormation template
+Description: Game Day Notification System using AWS
+
+Resources:
+  # IAM Policy for Lambda Execution Role
+  GameDayLambdaExecutionRolePolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: "GameDayLambdaPublishSNSPolicy"
+      Roles:
+        - !Ref GameDayLambdaExecutionRole
+      PolicyDocument:
+        Version: "2012-10-17"  # Standard version for IAM policy documents
+        Statement:
+          - Effect: "Allow"  # Defines the permissions
+            Action:
+              - "sns:Publish"  # Allows Lambda to publish messages to the SNS topic
+            Resource: "arn:aws:sns:REGION:ACCOUNT_ID:TOPIC_NAME"  # Replace with your SNS topic ARN
+
+  # IAM Role for Lambda Execution
+  GameDayLambdaExecutionRole:
+    Type: AWS::IAM::Role  # IAM role that the Lambda function will assume
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: "sts:AssumeRole"
+            Principal:
+              Service: "lambda.amazonaws.com"  # Defines who or what can assume this role
+      Policies:
+        - PolicyName: "AWSLambdaBasicExecutionRole"  # AWS-managed policy for CloudWatch Logs
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "logs:*"
+                Resource: "arn:aws:logs:*:*:*"
+        - PolicyName: "GameDayLambdaPublishSNSPolicy"  # Custom policy for SNS Publish
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "sns:Publish"
+                Resource: "arn:aws:sns:REGION:ACCOUNT_ID:TOPIC_NAME"  # Replace with your SNS topic ARN
+
+  # Lambda Function
+  GameDayLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: "GameDayNotificationFunction"
+      Handler: "lambda_function.lambda_handler"  # Lambda handler function
+      Role: !GetAtt GameDayLambdaExecutionRole.Arn
+      Runtime: "python3.8"
+      Timeout: 60
+      MemorySize: 128
+      Environment:
+        Variables:
+          SPORTS_API_KEY: "API_KEY_PLACEHOLDER"  # Replace with actual value
+          SNS_TOPIC_ARN: "arn:aws:sns:REGION:ACCOUNT_ID:TOPIC_NAME"  # Replace with your SNS topic ARN
+      Code:
+        S3Bucket: "S3_BUCKET_NAME"  # Replace with actual S3 bucket name
+        S3Key: "lambda_code.zip"  # Replace with actual code location in the bucket
+
+  # IAM Role for EventBridge to Invoke Lambda
+  EventBridgeLambdaInvokeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "events.amazonaws.com"  # EventBridge as principal
+            Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: "EventBridgeLambdaInvokePolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: "lambda:InvokeFunction"
+                Resource: !GetAtt GameDayLambdaFunction.Arn  # Dynamically reference Lambda ARN
+
+  # EventBridge Rule
+  GameDayNotificationScheduleRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: "GameDayNotificationScheduleRule"
+      Description: "Trigger Lambda for game day notifications based on schedule"
+      ScheduleExpression: "cron(0 9-23/2 * * ? *)"  # Every 2 hours between 9 AM and 11 PM
+      State: "ENABLED"
+      Targets:
+        - Arn: !GetAtt GameDayLambdaFunction.Arn  # Dynamically reference Lambda ARN
+          Id: "GameDayNotificationFunctionTarget"
+          InputTransformer:
+            InputPathsMap:
+              currentDate: "$.time"  # Use the built-in 'time' field to pass the current time
+            InputTemplate: '{"date": "${aws:now()}" }'  # Pass the current date as 'date'
+
+  # Lambda Permission for EventBridge
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref GameDayLambdaFunction  # Dynamically reference Lambda function
+      Principal: "events.amazonaws.com"
+      SourceArn: !GetAtt GameDayNotificationScheduleRule.Arn  # Reference EventBridge Rule ARN
+
+  # CloudWatch Log Group for Lambda
+  GameDayLambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${GameDayLambdaFunction}"  # Explicit Log Group for Lambda
+      RetentionInDays: 7  # Retain logs for 7 days for cost control and monitoring
+
+Outputs:  # Outputs for CloudFormation stack
+  LambdaFunctionArn:
+    Description: "ARN of the Lambda function"
+    Value: !GetAtt GameDayLambdaFunction.Arn
+  SnsTopicArn:
+    Description: "ARN of the SNS topic"
+    Value: "arn:aws:sns:REGION:ACCOUNT_ID:TOPIC_NAME"  # Replace with your SNS topic ARN

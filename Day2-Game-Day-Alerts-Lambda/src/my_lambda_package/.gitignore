@@ -1,0 +1,21 @@
+# Ignore deployment packages
+*.zip
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+
+# Ignore directories related to dependencies
+__pycache__/
+venv/
+env/
+node_modules/
+
+# Ignore environment-specific files (if applicable)
+.env
+
+# Ignore logs
+*.log
+
+# Ignore AWS SAM/CloudFormation-specific files
+.aws-sam/
