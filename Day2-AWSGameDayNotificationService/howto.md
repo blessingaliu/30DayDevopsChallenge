@@ -10,7 +10,7 @@ Ensure the following tools are installed on your system:
 - AWS CLI (Command Line Interface)
 - VS Code (with Python extension)
 
-### 1. **Set Up SportsDataIO and Obtain the NBA API Key**
+### 1. Step 1: Set Up SportsDataIO and Obtain the NBA API Key
 
 - **Create a SportsDataIO Account**
     - Go to [SportsDataIO](https://sportsdata.io/) and sign up for an account.
@@ -19,7 +19,7 @@ Ensure the following tools are installed on your system:
 
 ---
 
-### 2. Manually Create an SNS Topic and Email Subscription
+### 2. Step 2: Manually Create an SNS Topic and Email Subscription
 
 - **Create an SNS Topic**
     - Name the topic `gameday-topic` (or any other preferred name).
@@ -32,9 +32,9 @@ Ensure the following tools are installed on your system:
 
 ---
 
-### 3. Upload Lambda Code to S3 Bucket
+###  Step 3: Upload Lambda Code to S3 Bucket
 
-#### **Step 1: Prepare Your Code**
+#### Prepare Your Code
 
 - Write the Python code for your Lambda function in a file called **[lambda_function.py](https://github.com/blessingaliu/30DayDevopsChallenge/blob/main/Day2-AWSGameDayNotificationService/src/lambda_function.py)**.
 
@@ -45,14 +45,16 @@ zip lambda_code.zip lambda_function.py
 ```
 
 
-#### **Step 2: Upload to S3**
+#### Upload to S3
 
 1. Go to the **S3 Console** in AWS Management Console.
 2. **Select the Bucket** where you want to upload the Lambda code (or create a new one if needed).
 3. **Click on "Upload"** and select your `lambda_code.zip` file.
 4. **Note the Bucket Name** and **S3 URI Path** of the uploaded file. For example, it might be `my-bucket-name/path/to/lambda_code.zip`.
 
-#### **Step 3: Prepare CloudFormation Template**
+---
+
+### Step 4: Prepare CloudFormation Template
 - I named mine [game_day_notification.yaml](https://github.com/blessingaliu/30DayDevopsChallenge/blob/main/Day2-AWSGameDayNotificationService/src/game_day_notification.yaml)
 
 **Key Considerations before deploying**
@@ -60,7 +62,7 @@ zip lambda_code.zip lambda_function.py
 - The `S3Bucket` should be `"youractuals3bucketname"` and the `S3Key` should be `"youractualS3URIPATH"`.
 
 ---
-### **Step 4: Deploy CloudFormation Stack**
+### Step 5: Deploy CloudFormation Stack
 
 1. **Go to the CloudFormation Console**:
     - Open the **AWS Management Console** and navigate to **CloudFormation**.
@@ -77,7 +79,8 @@ zip lambda_code.zip lambda_function.py
     - Click **Create Stack** to begin the deployment process.
   
 ---
-### **Step 5: Monitor Stack Creation**
+
+### Step 6: Monitor Stack Creation
 
 - **Track Progress**:
     - You can track the stack creation in the **Events** tab of the CloudFormation Console.
@@ -87,7 +90,7 @@ zip lambda_code.zip lambda_function.py
 
  
 ---
-### **Step 6: Test the Setup**
+### Step 7: Test the Setup
 
 1. **Manually Invoke Lambda (Optional)**:
     - In the **Lambda Console**, go to your Lambda function.
@@ -97,13 +100,16 @@ zip lambda_code.zip lambda_function.py
 3. **Check CloudWatch Logs**:
     - Open **CloudWatch Logs** and look at the logs for your Lambda function to validate if everything is working as expected.
 
+
 ---
-### **Step 7. **Verify Notifications**
+### Step 8: Verify Notifications
 
 1. **Check for SNS Notifications**:
     - Ensure that emails are sent to the subscribed address when the Lambda function publishes a message to the SNS topic.
 2. **Confirm No Errors**:
     - Ensure the Lambda function completes without errors and the notifications are sent correctly.
     - Based on the cron expression cron(0 9-23/2 * * ? *), the Lambda function will be triggered every 2 hours from 9:00 AM to 11:00 PM (in UTC).
-  
+
+At 11AM, I received my email:
+[Email Notification]()
   
