@@ -23,7 +23,7 @@ This project demonstrates building a containerized API management system for que
 ---
 
 ## **Technical Architecture**
-![Diagram](Day4-GameDayScheduleAPI/Game Day Schedule API.drawio.png)
+![Diagram](https://github.com/blessingaliu/30DayDevopsChallenge/blob/b53b886ec8b9e2cfb0198a5f510c13f699337660/Day4-GameDayScheduleAPI%20copy/Game%20Day%20Schedule%20API.drawio.png)
 
 ---
 
